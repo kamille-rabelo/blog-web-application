@@ -1,0 +1,24 @@
+:root {
+    --primary-color: #2C3639;
+    --secondary-color: #3F4E4F;
+    --tertiary-color: #A27B5C;
+    --quartenary-color: #DCD7C9;
+}
+
+body {
+    background-color: var(--primary-color);
+    color: var(--quartenary-color);
+}
+
+.customized-button {
+    background-color: var(--tertiary-color);
+    border-color: var(--tertiary-color);
+    color: var(--quartenary-color);
+    transition: background-color 0.3s ease;
+}
+
+.customized-button:hover, .customized-button:active, .custom-btn:focus {
+    background-color: #8d6b50;
+    border-color: #8d6b50;
+    transform: scale(0.98); 
+}
