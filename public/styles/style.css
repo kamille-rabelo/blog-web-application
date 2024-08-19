@@ -10,15 +10,62 @@ body {
     color: var(--quartenary-color);
 }
 
-.customized-button {
+.custom-btn {
     background-color: var(--tertiary-color);
     border-color: var(--tertiary-color);
     color: var(--quartenary-color);
     transition: background-color 0.3s ease;
 }
 
-.customized-button:hover, .customized-button:active, .custom-btn:focus {
+.custom-btn:hover, .custom-btn:active, .custom-btn:focus {
     background-color: #8d6b50;
     border-color: #8d6b50;
     transform: scale(0.98); 
+}
+
+.input {
+    background-color: transparent;
+    outline: var(--secondary-color);
+    border-color: var(--secondary-color) !important;
+    color: var(--quartenary-color) !important;
+}
+
+.input::placeholder {
+    color: var(--quartenary-color);
+    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+
+.input:focus {
+    background-color: transparent;
+    border-color: var(--secondary-color) !important;
+    color: var(--quartenary-color) !important;
+    outline: none;
+    box-shadow: 0 0 8px 4px var(--secondary-color);
+}
+
+.container-flex {
+    display: flex;
+    flex-flow: column wrap;
+    gap: 1.5rem;
+}
+
+.btn-no-bg {
+    background-color: transparent;
+    border-color: var(--tertiary-color) !important;
+    color: var(--quartenary-color) !important;
+    transition: background-color 0.3s ease;
+}
+
+.btn-no-bg:hover, .btn-no-bg:active, .btn-no-bg:focus {
+    background-color: var(--secondary-color);
+    border-color:  var(--secondary-color) !important;
+    outline: none;
+    transform: scale(0.98); 
+}
+
+.top {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    align-items: center;
 }

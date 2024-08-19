@@ -1,22 +1,59 @@
 <%- include("partials/header.ejs") %>
 
-<% if (locals.posts) { %>
+<section class="collapse" id="collapseForm">
+  <div class="container mt-4 border-bottom">
+    <form action="/" method="post">
+      <div class="container-flex my-3">
+        <input name="postTitle" class="form-control form-control-lg input border" type="text" maxlength="100" placeholder="Title">
+        <textarea name="postContent" class="form-control input border" type="text" placeholder="Type your post here" maxlength="2000" style="height: 15rem;"></textarea>
+      </div>
+      <div class="d-grid gap-2 d-md-flex justify-content-md-start mb-5">
+        <button type="button" class="btn btn-no-bg px-4" data-bs-toggle="collapse" href="#collapseForm">Cancel</button>
+        <button type="submit" class="btn custom-btn px-4 me-md-2">Post</button>
+      </div>
+    </form>
+  </div>
+</section>
 
-<% } else { %>
-    <div class="px-4 pt-5 my-5 text-center border-bottom" data-bs-theme="dark">
-        <h1 class="display-4 fw-bold text-body-emphasis">No posts yet? Let's fix that!</h1>
-        <div class="col-lg-6 mx-auto">
-          <p class="lead mb-4">Start sharing your thoughts and stories. Create your first post now!</p>
-          <div class="d-grid gap-2 d-sm-flex justify-content-sm-center mb-5">
-            <button type="button" class="btn customized-button btn-lg px-4 me-sm-3">New post</button>
-          </div>
-        </div>
-        <div class="overflow-hidden" style="max-height: 30vh;">
-          <div class="container px-5">
-            <img src="https://www.cornwallseawaynews.com/wp-content/uploads/sites/19/2021/05/educators-educateurs04.jpg" class="img-fluid border rounded-3 shadow-lg mb-4" alt="Table with letter drawing" width="700" height="500" loading="lazy">
-          </div>
-        </div>
+<% if (locals.data[0]) { %>
+  <div class="container my-3">
+    <div class="top border-bottom my-2">
+      <h1>My Posts</h1>
+      <button type="button" class="btn custom-btn px-4 me-sm-3" data-bs-toggle="collapse" href="#collapseForm">New</button>
     </div>
+    <% console.log(data) %>
+      <% data.forEach(element => { %>
+        <div class="my-3">
+          <h2><%= element["Title"] %></h2>
+          <p><%- element["Content"] %></p>
+          <%= console.log(element) %>
+        </div>
+        <hr>
+      <% }) %>
+  </div>
+<% } else { %>
+  <section class="noContent">
+    <div class="px-4 pt-5 my-5 text-center border-bottom" data-bs-theme="dark">
+      <h1 class="display-4 fw-bold text-body-emphasis">No posts yet? Let's fix that!</h1>
+      <div class="col-lg-6 mx-auto">
+        <p class="lead mb-4">Start sharing your thoughts and stories. Create your first post now!</p>
+        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center mb-5">
+          <button type="button" class="btn custom-btn btn-lg px-4 me-sm-3" id="btnCollapse" data-bs-toggle="collapse" href="#collapseForm">New post</button>
+        </div>
+      </div>
+      <div class="overflow-hidden" style="max-height: 30vh;">
+        <div class="container px-5">
+          <img src="https://www.cornwallseawaynews.com/wp-content/uploads/sites/19/2021/05/educators-educateurs04.jpg" class="img-fluid border rounded-3 shadow-lg mb-4" alt="Table with letter drawing" width="700" height="500" loading="lazy">
+        </div>
+      </div>
+  </div>
+  </section>
 <% } %>
 
 <%- include("partials/footer.ejs") %>
+
+<script>
+  $('#btnCollapse').click( () => {
+    $('.noContent').attr('hidden', 'on');
+  });
+</script>
