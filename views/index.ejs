@@ -1,17 +1,19 @@
 <%- include("partials/header.ejs") %>
 
 <section class="collapse" id="collapseForm">
-  <div class="container mt-4 border-bottom">
-    <form action="/" method="post">
+  <div class="container mt-4">
+    <form action="/" method="post" class="row g-3">
+      <input type="hidden" name="inputChange" class="change">
       <div class="container-flex my-3">
-        <input name="postTitle" class="form-control form-control-lg input border" type="text" maxlength="100" placeholder="Title">
-        <textarea name="postContent" class="form-control input border" type="text" placeholder="Type your post here" maxlength="2000" style="height: 15rem;"></textarea>
+        <input name="postTitle" class="form-control form-control-lg input border" id="title" type="text" maxlength="100" placeholder="Title" required>
+        <textarea name="postContent" class="form-control input border" id="content" type="text" placeholder="Type your post here" required maxlength="2000" style="height: 15rem;"></textarea>
       </div>
       <div class="d-grid gap-2 d-md-flex justify-content-md-start mb-5">
-        <button type="button" class="btn btn-no-bg px-4" data-bs-toggle="collapse" href="#collapseForm">Cancel</button>
-        <button type="submit" class="btn custom-btn px-4 me-md-2">Post</button>
+        <button type="button" class="btn btn-no-bg px-4 cancel" id="cancel" data-bs-toggle="collapse" href="#collapseForm">Cancel</button>
+        <button type="submit" class="btn custom-btn px-4 me-md-2" id="post">Post</button>
       </div>
     </form>
+    <hr>
   </div>
 </section>
 
@@ -19,26 +21,39 @@
   <div class="container my-3">
     <div class="top border-bottom my-2">
       <h1>My Posts</h1>
-      <button type="button" class="btn custom-btn px-4 me-sm-3" data-bs-toggle="collapse" href="#collapseForm">New</button>
+      <button type="button" class="btn custom-btn px-4 cancel" data-bs-toggle="collapse" href="#collapseForm">New</button>
     </div>
-    <% console.log(data) %>
-      <% data.forEach(element => { %>
+      <% data.forEach((element, index) => { %>
         <div class="my-3">
-          <h2><%= element["Title"] %></h2>
-          <p><%- element["Content"] %></p>
-          <%= console.log(element) %>
+          <div class="top">
+            <h2 id="title-<%= index %>"><%= element["title"] %></h2>
+            <div>
+              <button type="submit" class="btn btn-no-bg">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+                  <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0"/>
+                </svg>
+              </button>
+              <button type="button" class="btn btn-no-bg edit-btn" id="<%= index %>" data-bs-toggle="collapse" href="#collapseForm">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
+                  <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.5.5 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11z"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+          <p id="content-<%= index %>"><%- element["content"] %></p>
+          <p class="small">Made in <%= element["date"] %></p>
         </div>
         <hr>
       <% }) %>
   </div>
 <% } else { %>
-  <section class="noContent">
+  <section class="no-content">
     <div class="px-4 pt-5 my-5 text-center border-bottom" data-bs-theme="dark">
       <h1 class="display-4 fw-bold text-body-emphasis">No posts yet? Let's fix that!</h1>
       <div class="col-lg-6 mx-auto">
         <p class="lead mb-4">Start sharing your thoughts and stories. Create your first post now!</p>
         <div class="d-grid gap-2 d-sm-flex justify-content-sm-center mb-5">
-          <button type="button" class="btn custom-btn btn-lg px-4 me-sm-3" id="btnCollapse" data-bs-toggle="collapse" href="#collapseForm">New post</button>
+          <button type="button" class="btn custom-btn btn-lg px-4 me-sm-3" id="btn-collapse" data-bs-toggle="collapse" href="#collapseForm">New post</button>
         </div>
       </div>
       <div class="overflow-hidden" style="max-height: 30vh;">
@@ -48,12 +63,46 @@
       </div>
   </div>
   </section>
+  <div id="data-container" data-json="<%= JSON.stringify(locals.data) %>"></div>
 <% } %>
 
 <%- include("partials/footer.ejs") %>
 
 <script>
-  $('#btnCollapse').click( () => {
-    $('.noContent').attr('hidden', 'on');
+  let titleInput = $('#title');
+  let contentInput = $('#content');
+  let postBtn = $('#post');
+  let changeInput = $('.change');
+
+  $('#btn-collapse').click( () => {
+    $('.no-content').attr('hidden', 'on');
   });
+
+  $('.edit-btn').click( function() {
+    let title = $(`#title-${this.id}`).text();
+    titleInput.attr('value', title);
+    changeInput.attr('value', this.id);
+    
+    let content = $(`#content-${this.id}`).text();
+    contentInput.text(content);
+    postBtn.text('Save');
+  });
+
+  $('.cancel').click(() => {
+    titleInput.removeAttr('value');
+    contentInput.text('');
+
+    postBtn.text('Post')
+    changeInput.removeAttr('value');
+  });
+
+  $(document).ready(() => {
+  const data = JSON.parse($('#data-container').attr('data-json'));
+
+  $('#cancel').click(() => {
+    if (!data[0]) {
+      location.reload();
+    }
+  });
+});
 </script>

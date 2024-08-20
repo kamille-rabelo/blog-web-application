@@ -69,3 +69,16 @@ body {
     justify-content: space-between;
     align-items: center;
 }
+
+.small {
+    font-size: small;
+}
+
+.input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 30px var(--primary-color) inset !important; 
+    -webkit-text-fill-color: var(--quartenary-color) !important; 
+}
+
+/* #btn-collapse {
+    margin: 0 !important;
+} */

@@ -6,8 +6,10 @@ const port = 3000;
 
 let data = [];
 
-function addData(title, content) {
-    data.push({Title: title, Content: content.replace(/\r\n/g, '<br>')});
+function addData(title, content, index="") {
+    let today = new Date();
+    today = today.getMonth() + '/' + today.getDate() + '/' +today.getFullYear()
+    index? data[index] = {title: title, content: content.replace(/\r\n/g, '<br>'), date: today} : data.push({title: title, content: content.replace(/\r\n/g, '<br>'), date: today});
 }
 
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -19,8 +21,7 @@ app.get("/", (req, res) => {
 });
 
 app.post("/", (req, res) => {
-    addData(req.body["postTitle"], req.body["postContent"]);
-    console.log(data);
+    req.body["inputChange"]? addData(req.body["postTitle"], req.body["postContent"], req.body["inputChange"]) : addData(req.body["postTitle"], req.body["postContent"]);
     res.redirect("/")
 });
 
