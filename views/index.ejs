@@ -21,13 +21,13 @@
 <% if (locals.data[0]) { %>
   <div class="container my-3">
     <div class="top border-bottom my-3">
-      <h1>My Posts</h1>
-      <button type="button" class="btn custom-btn px-4 cancel" data-bs-toggle="collapse" href="#collapseForm">New</button>
+      <h2>My Brews</h2>
+      <button type="button" class="btn custom-btn px-4 my-2 cancel" data-bs-toggle="collapse" href="#collapseForm">New</button>
     </div>
       <% data.forEach((element, index) => { %>
         <div class="my-3">
           <div class="top">
-            <h2 id="title-<%= index %>"><%= element["title"] %></h2>
+            <h3 id="title-<%= index %>"><%= element["title"] %></h3>
             <div>
               <form action="/" method="post">
                 <input type="hidden" name="postIndex" value="<%= index %>">
@@ -54,9 +54,9 @@
 <% } else { %>
   <section class="no-content">
     <div class="px-4 pt-5 my-5 text-center border-bottom" data-bs-theme="dark">
-      <h1 class="display-4 fw-bold text-body-emphasis">No posts yet? Let's fix that!</h1>
+      <h1 class="display-4 fw-bold text-body-emphasis">No brews yet? Let's change that!</h1>
       <div class="col-lg-6 mx-auto">
-        <p class="lead mb-4">Start sharing your thoughts and stories. Create your first post now!</p>
+        <p class="lead mb-4">Start brewing your thoughts and stories. Pour your first post now!</p>
         <div class="d-grid gap-2 d-sm-flex justify-content-sm-center mb-5">
           <button type="button" class="btn custom-btn btn-lg px-4 me-sm-3" id="btn-collapse" data-bs-toggle="collapse" href="#collapseForm">New post</button>
         </div>
