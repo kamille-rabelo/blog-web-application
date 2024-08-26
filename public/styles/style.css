@@ -79,7 +79,7 @@ body {
     -webkit-text-fill-color: var(--quartenary-color) !important; 
 }
 
-header {
+.header-bg {
     background-color: var(--tertiary-color);
 }
 
